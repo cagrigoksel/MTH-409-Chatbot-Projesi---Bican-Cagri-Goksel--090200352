@@ -1,0 +1,28 @@
+project_name: "TechPoint Assistant"
+model_name: "gemini-2.0-flash"
+
+paths:
+  raw_data: "data/raw/"
+  processed_data: "data/processed/techpoint_advanced_dataset.xlsx"
+  vector_db: "data/vector_db/"
+
+generation_settings:
+  batch_size: 20
+  target_per_intent: 120
+
+system_context: >
+  Sen "TechPoint" adında, üst düzey teknoloji ürünleri (Apple, Samsung, Dyson, Sony, Monster, Asus vb.) 
+  satan bir mağazanın sanal asistanı için veri üreten bir uzmanısm. 
+  Müşteriler bazen resmi, bazen samimi, bazen de sinirli mesajlar yazabilirler.
+
+intents:
+  Greeting: "Merhaba, selam, hi, ordamısın gibi başlangıçlar."
+  Goodbye: "Çıkış, bye, iyi günler, sonra görüşürüz, kapat."
+  AddToCart: "Spesifik ürünleri sepete ekleme isteği. Örn: 'Siyah iPhone 15 alacağım'."
+  RemoveFromCart: "Sepetten ürün silme, vazgeçme."
+  ViewCart: "Sepetimdekileri göster, ne kadar tuttu?"
+  Checkout: "Ödemeye geç, satın alıyorum."
+  TechSpecs: "Ürünlerin teknik detaylarını sorma (RAG). Örn: 'S24 Ultra su geçirir mi?'"
+  CompareProducts: "İki ürünü kıyaslama isteği."
+  TrackOrder: "Kargo takibi. Örn: 'Kargom nerde?'"
+  Refusal: "Teknoloji dışı, alakasız sorular. Örn: 'Hava durumu', 'Bana şiir yaz'."

@@ -1,0 +1,21 @@
+# Python Derleme Dosyaları
+__pycache__/
+*.py[cod]
+
+# Sanal Ortam (Çok büyük, git'e atılmaz)
+venv/
+.venv/
+env/
+
+# Ortam Değişkenleri (GİZLİ KEYLER BURADA, ASLA GİT'E GİTMEMELİ)
+.env
+
+# Veritabanı (Büyük dosyalar)
+data/vector_db/
+
+# MacOS Gereksiz Dosyaları
+.DS_Store
+
+# IDE Dosyaları
+.vscode/
+.idea/
