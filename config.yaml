@@ -7,8 +7,8 @@ paths:
   vector_db: "data/vector_db/"
 
 generation_settings:
-  batch_size: 20
-  target_per_intent: 120
+  batch_size: 30
+  target_per_intent: 150
 
 system_context: >
   Sen "TechPoint" adında, üst düzey teknoloji ürünleri (Apple, Samsung, Dyson, Sony, Monster, Asus vb.) 
