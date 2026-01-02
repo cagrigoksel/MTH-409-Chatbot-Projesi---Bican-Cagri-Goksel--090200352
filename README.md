@@ -1,5 +1,7 @@
 # 🤖 TechPoint: AI Destekli Teknoloji Asistanı
 
+### Github linki: "https://github.com/cagrigoksel/MTH-409-Chatbot-Projesi---Bican-Cagri-Goksel--090200352"
+
 ## MTH-409 Chatbot Geliştirme Temelleri Term Project
 
 **Ders:** MTH-409 Chatbot Geliştirme Temelleri
