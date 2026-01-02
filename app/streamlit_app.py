@@ -98,7 +98,7 @@ if prompt := st.chat_input("Mesajınızı yazın..."):
                     context="S25 Ultra Kılavuzu..."
                 )
             else:
-                response_text = f"Llama 3 Modeli: '{intent}' niyetini tespit ettim ancak RAG yeteneğim kapalı. Gemini'ye geçerseniz cevaplayabilirim."
+                response_text = f"Llama 3 Modeli: '{intent}' niyetini anladım ancak sana şu anda yardımcı olamam."
         
         elif intent == "AddToCart" and entity:
             st.session_state.cart.append(entity)
