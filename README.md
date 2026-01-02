@@ -3,7 +3,7 @@
 ## MTH-409 Chatbot Geliştirme Temelleri Term Project
 
 **Ders:** MTH-409 Chatbot Geliştirme Temelleri
-**Öğrenciler:** Bican & Çağrı Göksel
+**Öğrenci Adı:** Bican Çağrı Göksel
 **Öğrenci No:** 090200352
 
 ---
