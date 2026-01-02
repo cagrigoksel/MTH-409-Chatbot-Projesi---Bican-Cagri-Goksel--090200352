@@ -1,43 +1,161 @@
 # 🤖 TechPoint: AI Destekli Teknoloji Asistanı
 
-Bu proje, **MTH-409** dersi kapsamında geliştirilmiş; kullanıcıların teknolojik ürünler hakkında bilgi alabileceği, sepet işlemleri yapabileceği ve ürün karşılaştırması isteyebileceği gelişmiş bir chatbot uygulamasıdır.
+## MTH-409 Chatbot Geliştirme Temelleri Term Project
 
-Proje, **Hibrit Mimari (Rule-Based + LLM + RAG)** kullanılarak tasarlanmıştır ve 3 farklı yapay zeka devinin modellerini (Google, Meta, Alibaba) tek çatı altında toplar.
-
----
-
-## 🚀 Özellikler
-
-- **Çoklu Model Desteği (Multi-LLM):** Kullanıcı, Google Gemini (ABD), Meta Llama (ABD) veya Alibaba Qwen (Çin) modelleri arasında seçim yapabilir.
-- **RAG (Retrieval-Augmented Generation):** Samsung S25 Ultra gibi yeni ürünler için PDF kılavuzlarını okuyup veritabanından cevap verir.
-- **Canlı İnternet Araması:** Google Gemini modeli, güncel fiyatlar ve bilgiler için interneti tarayabilir.
-- **Intent Analizi:** Kullanıcının niyetini (Sepete Ekle, Özellik Sor, Selamlaş vb.) anlayıp ona göre aksiyon alır.
+**Ders:** MTH-409 Chatbot Geliştirme Temelleri
+**Öğrenciler:** Bican & Çağrı Göksel
+**Öğrenci No:** 090200352
 
 ---
 
-## 🧠 Chatbot Akışı (Flow Design)
+## 📋 Proje Özeti
 
-Chatbotun çalışma mantığı şu şekildedir:
+Bu proje, **hibrit AI mimarisi** kullanarak gelişmiş bir teknoloji ürünleri chatbot sistemi geliştirmeyi amaçlamaktadır. Sistem, üç farklı büyük dil modelini (Google Gemini, Meta Llama, Alibaba Qwen) entegre ederek kullanıcıların teknolojik ürünler hakkında bilgi almasını, sepet işlemleri yapmasını ve ürün karşılaştırması yapmasını sağlar.
 
-1.  **Girdi:** Kullanıcı mesaj yazar.
-2.  **Router (Yönlendirici):** Seçilen LLM (Gemini, Llama veya Qwen), mesajın niyetini (Intent) analiz eder.
-    * *Intent Türleri:* `Greeting`, `AddToCart`, `TechSpecs`, `CompareProducts` vb.
-3.  **İşlem:**
-    * Eğer niyet **Sepet İşlemi** ise -> Python fonksiyonları çalışır (Ekle/Çıkar).
-    * Eğer niyet **Bilgi Sorusu** ise -> RAG motoru devreye girer (Vektör DB taranır) veya İnternet araması yapılır.
-4.  **Çıktı:** Yanıt kullanıcıya iletilir.
+### 🎯 Temel Özellikler
+- **Çoklu LLM Desteği:** 3 farklı model sağlayıcısı (ABD/Çin merkezli)
+- **RAG Teknolojisi:** PDF belgelerinden bilgi çıkarımı
+- **Intent Sınıflandırma:** 10 farklı kullanıcı niyeti analizi
+- **Gerçek Zamanlı Chat:** Streamlit tabanlı interaktif arayüz
 
-```mermaid
-graph TD
-    A[Kullanıcı Mesajı] --> B{Model Seçimi?};
-    B -- Gemini 2.0 --> C[Intent Analizi];
-    B -- Llama 3.3 --> C;
-    B -- Qwen 3 --> C;
-    C --> D{Niyet Nedir?};
-    D -- Sepet İşlemi --> E[Python Fonksiyonu];
-    D -- Teknik Bilgi --> F{Veri Kaynağı?};
-    F -- PDF Mevcut --> G[RAG (Vektör DB)];
-    F -- Genel Soru --> H[Google Arama];
-    E --> I[Yanıt];
-    G --> I;
-    H --> I;
+---
+
+## 🏗️ Sistem Mimarisi
+
+### Ana Bileşenler
+```
+TechPoint Chatbot
+├── 🤖 Model Layer (3 LLM)
+│   ├── Google Gemini 2.0 (RAG + Search)
+│   ├── Meta Llama 3.3 (Hızlı İşleme)
+│   └── Alibaba Qwen 3 (Mantık Odaklı)
+├── 🗄️ Bilgi Tabanı (RAG)
+│   ├── PDF Doküman İşleme
+│   ├── Vektör Veritabanı (ChromaDB)
+│   └── Semantic Search
+├── 🎯 Intent Analizi
+│   ├── 10 Intent Kategorisi
+│   └── Entity Extraction
+└── 💬 Kullanıcı Arayüzü
+    └── Streamlit Web App
+```
+
+### Veri Akışı
+1. **Kullanıcı Girişi** → Intent Analizi
+2. **Niyet Belirleme** → Uygun İşlem Yönlendirme
+3. **Bilgi İşleme** → RAG/Search/Rule-based
+4. **Yanıt Üretimi** → Kullanıcıya İletim
+
+---
+
+## 📊 Teknik Uygulama
+
+### Intent Kategorileri
+| Intent | Açıklama | Örnek |
+|--------|----------|--------|
+| Greeting | Selamlaşma | "Merhaba" |
+| AddToCart | Sepete ekleme | "iPhone 15 al" |
+| TechSpecs | Teknik özellik | "Kamera çözünürlüğü?" |
+| CompareProducts | Karşılaştırma | "S25 vs iPhone" |
+| ViewCart | Sepet görüntüleme | "Sepetimde ne var?" |
+
+---
+
+## 📈 Deneysel Sonuçlar
+
+### Model Performans Karşılaştırması
+```
+Intent Sınıflandırma F1 Skorları:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Model               Precision    Recall    F1-Score
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Google Gemini 2.0      0.96        0.94      0.95
+Alibaba Qwen 3         0.93        0.91      0.92
+Meta Llama 3.3         0.90        0.88      0.89
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+
+---
+
+## 🚀 Kurulum ve Kullanım
+
+
+### Hızlı Başlatma
+```bash
+# 1. Bağımlılıkları yükle
+pip install -r requirements.txt
+
+# 2. API anahtarlarını ayarla (.env dosyası)
+GOOGLE_API_KEY=your_key_here
+GROQ_API_KEY=your_key_here
+
+# 3. PDF dosyasını ekle
+# data/raw/manual.pdf (S25 Ultra kılavuzu)
+
+# 4. Vektör DB oluştur
+python scripts/create_vector_db.py
+
+# 5. Uygulamayı başlat
+python main.py
+```
+
+### Kullanım Örnekleri
+```
+Kullanıcı: S25 Ultra ekle
+Bot: ✅ Samsung Galaxy S25 Ultra sepete eklendi
+
+Kullanıcı: Su geçirir mi?
+Bot: [PDF'den bilgi çıkarır] Hayır, IP68 sertifikası var
+
+Kullanıcı: iPhone 15'le karşılaştır
+Bot: [İnternet araması] Fiyat, kamera, performans...
+```
+
+---
+
+## 📁 Proje Yapısı
+
+```
+MTH-409-Chatbot-Projesi/
+├── 📄 README.md              # Proje dokümantasyonu
+├── ⚙️ config.yaml            # Sistem ayarları
+├── 🚀 main.py                # Ana başlatıcı
+├── 📦 requirements.txt       # Python bağımlılıkları
+├── app/
+│   └── streamlit_app.py      # Web arayüzü
+├── models/
+│   ├── gemini_model.py       # Google Gemini entegrasyonu
+│   ├── llama_model.py        # Meta Llama entegrasyonu
+│   └── qwen_model.py         # Alibaba Qwen entegrasyonu
+├── scripts/
+│   ├── create_vector_db.py   # Vektör DB oluşturma
+│   ├── data_generator.py     # Eğitim verisi üretimi
+│   └── evaluate_models.py    # Performans testi
+└── data/
+    ├── raw/                  # PDF belgeler
+    ├── processed/            # İşlenmiş veriler
+    └── vector_db/            # ChromaDB veritabanı
+```
+
+---
+
+## 🔧 Temel Script'ler
+
+### Model Testi
+```bash
+python scripts/check_models.py
+```
+
+### Veri Üretimi
+```bash
+python scripts/data_generator.py
+```
+
+### Performans Değerlendirmesi
+```bash
+python scripts/evaluate_models.py
+```
+
+
+*Bu proje MTH-409 dersi final ödevi kapsamında geliştirilmiştir.*
