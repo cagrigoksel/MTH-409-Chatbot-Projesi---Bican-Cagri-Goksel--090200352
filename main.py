@@ -4,7 +4,6 @@ import time
 import subprocess
 from dotenv import load_dotenv
 
-# Renkli Çıktılar için (Terminalde şık dursun)
 class Colors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -32,7 +31,7 @@ def check_env():
     groq_key = os.getenv("GROQ_API_KEY")
     
     if not google_key or not groq_key:
-        print(f"{Colors.FAIL}❌ HATA: .env dosyasında API Key'ler eksik!{Colors.ENDC}")
+        print(f"{Colors.FAIL} HATA: .env dosyasında API Key'ler eksik!{Colors.ENDC}")
         sys.exit(1)
     
     print_success("API Anahtarları doğrulandı.")
@@ -47,21 +46,20 @@ def setup_rag():
     if os.path.exists(db_path) and len(os.listdir(db_path)) > 0:
         print_success("Vektör Veritabanı zaten mevcut. Kurulum atlanıyor.")
     else:
-        print_warning("Veritabanı bulunamadı. S25 Ultra PDF'i işleniyor...")
+        print_warning("Veritabanı bulunamadı. PDF'ler işleniyor...")
         try:
             # create_vector_db.py scriptini çalıştır
             subprocess.run([sys.executable, "scripts/create_vector_db.py"], check=True)
             print_success("Veritabanı başarıyla oluşturuldu!")
         except subprocess.CalledProcessError:
-            print(f"{Colors.FAIL}❌ PDF işlenirken hata oluştu!{Colors.ENDC}")
+            print(f"{Colors.FAIL}PDF işlenirken hata oluştu!{Colors.ENDC}")
 
 def run_evaluation():
-    """Hocaya F1 Skorlarını Göstermek İster misin?"""
-    print_step("Model Performans Testi (Opsiyonel)")
+    print_step("Model Performans Testi ")
     
-    choice = input(f"{Colors.BOLD}Modelleri (Gemini vs LLama vs Qwen) şimdi yarıştırıp F1 Skorlarını görmek ister misiniz? (e/h): {Colors.ENDC}").lower()
+    choice = input(f"{Colors.BOLD}Modelleri (Gemini vs LLama vs Qwen) karşılarştırıp başarı metrriklerini görmek ister misiniz? (y/n): {Colors.ENDC}").lower()
     
-    if choice == 'e':
+    if choice == 'y':
         print("\nBenchmark Başlıyor... (Bu işlem 1-2 dakika sürebilir)")
         try:
             subprocess.run([sys.executable, "scripts/evaluate_models.py"], check=True)

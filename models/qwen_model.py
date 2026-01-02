@@ -9,7 +9,6 @@ class QwenModel:
     def __init__(self):
         self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
         
-        # Listeden kopyaladığımız Alibaba'nın Qwen 3 modeli
         self.model_name = "qwen/qwen3-32b" 
 
     def predict_intent(self, user_input):

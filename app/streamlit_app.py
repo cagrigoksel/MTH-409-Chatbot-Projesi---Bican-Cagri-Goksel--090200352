@@ -2,7 +2,6 @@ import streamlit as st
 import sys
 import os
 
-# Ana dizini path'e ekle ki 'models' klasörünü görebilsin
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.gemini_model import GeminiModel
@@ -27,9 +26,9 @@ with st.sidebar:
     selected_model_name = st.radio(
         "Yapay Zeka Modeli Seç:",
         (
-            "Google Gemini 2.0 (Search + RAG)", 
-            "Meta Llama 3.3 (ABD - Hız)", 
-            "Alibaba Qwen 3 (Çin - Mantık)"  # YENİ
+            "Google Gemini 2.0 (ABD - Search + RAG)", 
+            "Meta Llama 3.3 (ABD - RAG)", 
+            "Alibaba Qwen 3 (Çin - Search + RAG)"  
         )
     )
     
@@ -91,7 +90,6 @@ if prompt := st.chat_input("Mesajınızı yazın..."):
         
         # B. Aksiyon Yönlendirmesi
         if intent in ["TechSpecs", "CompareProducts", "TrackOrder"]:
-            # Sadece Gemini'de generate_response var (RAG/Search için)
             if hasattr(current_model, 'generate_response'):
                 st.write("📚 Bilgi Bankası ve İnternet taranıyor...")
                 response_text = current_model.generate_response(

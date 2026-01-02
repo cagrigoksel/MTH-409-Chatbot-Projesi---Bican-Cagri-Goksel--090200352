@@ -8,7 +8,7 @@ load_dotenv()
 
 class GeminiModel:
     def __init__(self):
-        # API Key ve Client kurulumu (Hata buradaydı, düzeltildi)
+        
         api_key = os.getenv("GOOGLE_API_KEY")
         self.client = genai.Client(api_key=api_key)
         self.model_name = "gemini-2.0-flash" 

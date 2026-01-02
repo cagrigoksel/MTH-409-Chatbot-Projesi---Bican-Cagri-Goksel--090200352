@@ -9,8 +9,6 @@ class LlamaModel:
     def __init__(self):
         self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
         
-        # ESKİ: self.model_name = "llama3-70b-8192"
-        # YENİ (En güncel ve güçlü sürüm):
         self.model_name = "llama-3.3-70b-versatile"
 
     def predict_intent(self, user_input):

@@ -8,7 +8,6 @@ from tqdm import tqdm
 # Modellerin bulunduğu klasörü tanıt
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# 3 DEV MODELİ İÇERİ ALIYORUZ
 from models.gemini_model import GeminiModel
 from models.qwen_model import QwenModel
 from models.llama_model import LlamaModel
@@ -20,7 +19,7 @@ def evaluate():
     # 1. Veri Setini Yükle
     data_path = "data/processed/techpoint_advanced_dataset.xlsx"
     if not os.path.exists(data_path):
-        print("❌ Veri seti bulunamadı!")
+        print("Veri seti bulunamadı!")
         return
 
     df = pd.read_excel(data_path)
@@ -28,7 +27,7 @@ def evaluate():
     # Test için rastgele 50 örnek
     test_df = df.sample(n=50, random_state=42)
     
-    print(f"🧪 Test Edilecek Veri Sayısı: {len(test_df)}")
+    print(f"Test Edilecek Veri Sayısı: {len(test_df)}")
 
     y_true = test_df['Intent'].tolist()
     
@@ -38,12 +37,12 @@ def evaluate():
     y_pred_llama = []
 
     # Modelleri Başlat
-    print("🔧 Modeller yükleniyor...")
+    print("Modeller yükleniyor...")
     gemini = GeminiModel()
     qwen = QwenModel()
     llama = LlamaModel()
 
-    print("\n🚀 Tahminler yapılıyor (Lütfen bekleyin)...")
+    print("\nTahminler yapılıyor (Lütfen bekleyin)...")
     
     # İlerleme çubuğu ile döngü
     for index, row in tqdm(test_df.iterrows(), total=len(test_df)):
@@ -83,19 +82,19 @@ def evaluate():
     
     # 1. GEMINI
     print("\n" + "="*60)
-    print("🔵 GOOGLE GEMINI 2.0 FLASH SONUÇLARI")
+    print("GOOGLE GEMINI 2.0 FLASH SONUÇLARI")
     print("="*60)
     print(classification_report(y_true, y_pred_gemini, zero_division=0))
 
     # 2. QWEN
     print("\n" + "="*60)
-    print("🟣 ALIBABA QWEN 3 SONUÇLARI")
+    print("ALIBABA QWEN 3 SONUÇLARI")
     print("="*60)
     print(classification_report(y_true, y_pred_qwen, zero_division=0))
 
     # 3. LLAMA
     print("\n" + "="*60)
-    print("🟠 META LLAMA 3.3 SONUÇLARI")
+    print("META LLAMA 3.3 SONUÇLARI")
     print("="*60)
     print(classification_report(y_true, y_pred_llama, zero_division=0))
 
